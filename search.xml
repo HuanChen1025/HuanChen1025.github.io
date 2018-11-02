@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[my first blog]]></title>
+    <url>%2F2018%2F11%2F02%2Fmy-first-blog%2F</url>
+    <content type="text"><![CDATA[第一题 完全多部图1. 题目时间限制：C/C++语言 2000MS；其他语言 4000MS 内存限制：C/C++语言 65536KB；其他语言 589824KB题目描述： 给定一张包含N个点、M条边的无向图，每条边连接两个不同的点， 且任意两点间最多只有一条边。 对于这样的简单无向图，如果能将所有点划分成若干个集合，使得任意两个同一集合内的点 之间没有边相连，任意两个不同集合内的点之间有边相连， 则称该图为完全多部图。现在你需要判断给定的图是否为完全多部图。 输入 第一行输入一个整数T表示数据组数，1≤T≤10。 每组数据格式为： 第一行包含两个整数N和M，1≤N≤1000，0≤M≤N(N-1)/2； 接下来M行，每行包含两个整数X和Y，表示第X个点和第Y个点之间有一条边，1≤X，Y≤N。 输出 每组输出占一行，如果给定的图为完全多部图，输出Yes，否则输出No。 样例输入 2 5 7 1 3 1 5 2 3 2 5 3 4 4 5 3 5 4 3 1 2 2 3 3 4 样例输出 Yes No 2. 分析要求：属于同一个集合的点互相不能连接，不同集合的点全部可以连接 第一个例子用邻接矩阵表示为：123450 0 1 0 10 0 1 0 11 1 0 1 10 0 1 0 11 1 1 1 0 从矩阵中可以看出： 1 2 4 的矩阵表示都 0 0 1 0 1. 是一样的。 可以理解为： 1 2 4 因为是同一个集合，所以他们的连接情况是一样，也就是矩阵表示是一致的。同时每一行中为0的元素表示它们之间没有连接，她们必定是属于一个集合的（而这些集合又是有一样的矩阵表达形式）。 所以问题转化为一个很简单的方式：从矩阵的第一行开始，找到第一行中为0的对应的哪一行进行比较，这两行是否一致。（因为如果为0，表示它们之间没有连接，是出于一个集合中不然就是矛盾。）。 举个例子。我遍历第一行 0 0 1 0 1，其中排除自己的第一个0，剩下两个0是 2 和 4 。那么我就用 第1行 和 第2行与 第4行进行比较，是否一致，不一致输出NO.遍历完全部一致那么输出Yes. 在比较的过程中，保存了每个结点的度，比较的时候比较两个结点的度是否一致，而不是去比较整个行是否一致，这样的比较会更快一些。 123456789101112131415161718192021222324252627282930313233343536373839404142434445public class Main &#123; public static void main(String args[]) &#123; Scanner sc = new Scanner(System.in); while (sc.hasNext()) &#123; int T = sc.nextInt(); //输入的组数 for (int t = 0; t &lt; T; t++) &#123;//循环，求每个组的结果 int n = sc.nextInt(); //N个点 int m = sc.nextInt(); //M条边 boolean visited[][] = new boolean[n][n]; while ( m-- &gt; 0) &#123; int i = sc.nextInt() - 1; int j = sc.nextInt() - 1; visited[i][j] = true; visited[j][i] = true; &#125; System.out.println(helper(n, visited)); &#125; &#125; &#125; private static String helper(int n, boolean visited[][]) &#123; int result[] = new int[n]; for (int i = 0; i &lt; n; i++) &#123; for (int j = 0; j &lt; n; j++) &#123; if (visited[i][j]) result[i]++; &#125; &#125; boolean flag = true;//如果 flag 为 true，表明可以分割为完全多部图 for (int i = 0; i &lt; n; i++) &#123; for (int j = i; j &lt; n; j++) &#123; //比较每行中的 0 元素，他们之间结点的度需要一致，如果不一致，返回 false if (!visited[i][j]) &#123; //当两个结点之间没有连接时，结点的度需要一致,如果不一致，直接返回 false if (result[i] != result[j]) &#123; flag = false; return "No"; &#125; &#125; &#125;//endfor &#125;//endfor return "Yes"; &#125;&#125;]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F11%2F01%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
